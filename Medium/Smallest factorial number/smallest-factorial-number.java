@@ -23,14 +23,14 @@ public class GFG
 
 
 //User function Template for Java
- class Solution
+class Solution
 {
     public static int countZero(int z) {
         int count = 0;
-        int divisor = 5;
-        while (z / divisor > 0) {
-            count += z / divisor;
-            divisor *= 5;
+        int powerOfFive = 5;
+        while (powerOfFive <= z) {
+            count += z / powerOfFive;
+            powerOfFive *= 5;
         }
         return count;
     }
@@ -55,4 +55,5 @@ public class GFG
         return result;
     }
 }
+
 
