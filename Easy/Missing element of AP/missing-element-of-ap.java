@@ -37,22 +37,22 @@ public class Main {
 
 
 class Solution {
+      
     int findMissing(int[] arr, int n) {
-        // code here
-         int diff=arr[1]-arr[0];
-        int diff2=arr[n-1]-arr[n-2];
+        int low = 0, high = n - 1;
+        int diff = (arr[n - 1] - arr[0]) / n; 
         
-        if(n==2){
-            diff=diff/2;
-        }
-        
-        int z=Math.min(diff,diff2);
-
-        for(int i=0;i<n-1;i++){
-            if(arr[i+1]!=arr[i]+z){
-                return arr[i]+z;
+        while (low < high) {
+            int mid = low + (high - low)/2;
+            
+          
+            if (arr[mid] == arr[0] + mid * diff) {
+                low = mid + 1; 
+            } else {
+                high = mid; 
             }
         }
-        return 0;
+        
+        return arr[0] + low * diff; 
     }
 }
