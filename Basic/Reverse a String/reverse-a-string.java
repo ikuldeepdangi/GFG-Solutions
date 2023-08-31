@@ -24,25 +24,25 @@ class Driver
 
 //User function Template for Java
 
-class Reverse {
+
+class Reverse
+{
     // Complete the function
     // str: input string
-    public static String reverseWord(String str) {
+    public static String reverseWord(String str)
+    {
         // Reverse the string str
+        char [] charArray = str.toCharArray();
+        int i=0;
+        int j=str.length()-1;
         
-        char [] res = str.toCharArray();
-        int i = 0;
-        int j = str.length() - 1;
-
-        while (i < j) {
-            char temp = res[i];
-            res[i] = res[j];
-            res[j] = temp;
-
-            i++;
-            j--;
+        while(i<j){
+            char temp = charArray [i];
+            charArray [i]=charArray [j];
+           charArray [j]=temp;
+           i++;
+           j--;
         }
-
-        return new String(res);
+        return new String(charArray);
     }
 }
