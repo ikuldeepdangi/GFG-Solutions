@@ -76,57 +76,60 @@ class Node {
 }
 
 */
-
 class Solution {
-    // Function to add two numbers represented by linked list.
-    static Node addTwoLists(Node first, Node second) {
-        // Reverse the input linked lists.
-        first = reverseList(first);
-        second = reverseList(second);
-
-        Node dummyHead = new Node(0);
-        Node current = dummyHead;
-        int carry = 0;
-
-        while (first != null || second != null || carry != 0) {
-            int sum = carry;
-
-            if (first != null) {
-                sum += first.data;
-                first = first.next;
-            }
-
-            if (second != null) {
-                sum += second.data;
-                second = second.next;
-            }
-
-            carry = sum / 10;
-            sum = sum % 10;
-
-            current.next = new Node(sum);
-            current = current.next;
-        }
-
-        // Reverse the result list to get the correct order.
-        Node result = reverseList(dummyHead.next);
-
-        return result;
-    }
-
     // Function to reverse a linked list.
     static Node reverseList(Node head) {
         Node prev = null;
         Node current = head;
         Node next = null;
-
         while (current != null) {
             next = current.next;
             current.next = prev;
             prev = current;
             current = next;
         }
-
         return prev;
+    }
+
+    // Function to add two numbers represented by linked list.
+    static Node addTwoLists(Node first, Node second) {
+        // Reverse the input linked lists.
+        first = reverseList(first);
+        second = reverseList(second);
+
+        int sum = 0;
+        int carry = 0;
+
+        Node temp = null;
+        Node head = null;
+        Node tail = null;
+
+        while (first != null || second != null) {
+            sum = carry + (first != null ? first.data : 0) + (second != null ? second.data : 0);
+            carry = (sum >= 10) ? 1 : 0;
+            sum = sum % 10;
+
+            temp = new Node(sum);
+
+            if (head == null) {
+                head = temp;
+            } else {
+                tail.next = temp;
+            }
+
+            tail = temp;
+
+            if (first != null) first = first.next;
+            if (second != null) second = second.next;
+        }
+
+        if (carry > 0) {
+            tail.next = new Node(carry);
+        }
+
+        // Reverse the result linked list back to the original order.
+        head = reverseList(head);
+
+        return head;
     }
 }
