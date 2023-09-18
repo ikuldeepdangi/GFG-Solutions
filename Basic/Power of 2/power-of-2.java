@@ -35,30 +35,35 @@ class Driver_class
 class Solution{
     
     // Function to check if given number n is a power of two.
+
     public static boolean isPowerofTwo(long n){
+    return (n > 0) && ((n & (n - 1)) == 0);
+}
+
+    // public static boolean isPowerofTwo(long n){
         
-        // Your code here
-        //  20 = 1
-        //  21 = 2
-        //  22 = 4
-        //  23 = 8
+    //     // Your code here
+    //     //  20 = 1
+    //     //  21 = 2
+    //     //  22 = 4
+    //     //  23 = 8
          
-         int i=0;
+    //      int i=0;
          
-         while(i<=n){
+    //      while(i<=n){
              
-            long p = (long) Math.pow(2, i);
+    //         long p = (long) Math.pow(2, i);
              
-             if(p==n){
-                 return true;
-             }
-             else if(p>n){
-                 return false;
-             }else{
-                 i++;
-             }
-         }
-         return false;
-    }
+    //          if(p==n){
+    //              return true;
+    //          }
+    //          else if(p>n){
+    //              return false;
+    //          }else{
+    //              i++;
+    //          }
+    //      }
+    //      return false;
+    // }
     
 }
