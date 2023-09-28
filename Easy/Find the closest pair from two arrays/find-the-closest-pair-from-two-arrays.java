@@ -45,38 +45,33 @@ class GFG {
 // } Driver Code Ends
 
 
-//User function Template for Java
+class Solution {
+    public static ArrayList<Integer> printClosest(int arr[], int brr[], int n, int m, int x) {
+        ArrayList<Integer> result = new ArrayList<>();
+        result.add(-1);
+        result.add(-1);
 
+        int i = 0; 
+        int j = m - 1;
+        int diff = Integer.MAX_VALUE;
 
+        while (i < n && j >= 0) {
+            int sum = arr[i] + brr[j];
+            int curDiff = Math.abs(sum - x);
 
-//User function Template for Java
-
-class Solution{
-    // Function for finding maximum and value pair
-    public static ArrayList<Integer> printClosest (int arr[], int brr[], int n, int m, int x) {
-        ArrayList<Integer> ans = new ArrayList<>();
-        int closestDiff = Integer.MAX_VALUE;
-        int num1 = 0;
-        int num2 = 0;
-        int i = 0;
-        int j = m-1;
-        while(i < n && j >= 0){
-            int currDiff = Math.abs(x-(arr[i] + brr[j]));
-            if(currDiff < closestDiff){
-                closestDiff = currDiff;
-                num1 = arr[i];
-                num2 = brr[j];
+            if (curDiff < diff) {
+                diff = curDiff;
+                result.set(0, arr[i]);
+                result.set(1, brr[j]);
             }
-            if(arr[i] + brr[j] < x){
+
+            if (sum < x) {
                 i++;
-            }
-            else{
+            } else {
                 j--;
             }
-                
         }
-        ans.add(num1);
-        ans.add(num2);
-        return ans;
+
+        return result;
     }
 }
