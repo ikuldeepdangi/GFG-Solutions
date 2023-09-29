@@ -97,6 +97,8 @@ class Node
 	}
 }*/
 
+
+
 class Solution
 {
     //Function to check whether the list is palindrome.
@@ -152,4 +154,5 @@ class Solution
         return true;
     }    
 }
+
 
