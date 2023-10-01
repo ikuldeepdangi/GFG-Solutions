@@ -130,47 +130,78 @@ Node.printList(Node node);
 class Solution {
     public static ArrayList<ArrayList<Integer>> findPairsWithGivenSum(int target, Node head) {
         // code here
-    }
-}
         
-
-
-
-
-
-class Solution {
-    public static ArrayList<ArrayList<Integer>> findPairsWithGivenSum(int target, Node head) {
         ArrayList<ArrayList<Integer>> result = new ArrayList<>();
         
-        if (head == null || head.next == null) {
-            return result; 
+        if(head == null || head.next == null){
+            return result;
         }
         
         Node left = head;
         Node right = head;
         
-        // Move the right pointer to the end of the list
-        while (right.next != null) {
-            right = right.next;
+        while(right.next!=null){
+            right=right.next;
         }
         
-        while (left != null && right != null && left != right && left.data <= right.data) {
-            int sum = left.data + right.data;
-            
-            if (sum == target) {
+        while(left!=null && right!=null && left!=right && left.data <= right.data){
+            int  sum  = left.data + right.data;
+            if(sum == target){
                 ArrayList<Integer> pair = new ArrayList<>();
                 pair.add(left.data);
                 pair.add(right.data);
                 result.add(pair);
+                
                 left = left.next;
-                right = right.prev;
-            } else if (sum < target) {
+                right=right.prev;
+            }else if(sum<target){
                 left = left.next;
             } else {
                 right = right.prev;
             }
         }
-        
         return result;
     }
 }
+        
+
+
+
+
+
+// class Solution {
+//     public static ArrayList<ArrayList<Integer>> findPairsWithGivenSum(int target, Node head) {
+//         ArrayList<ArrayList<Integer>> result = new ArrayList<>();
+        
+//         if (head == null || head.next == null) {
+//             return result; 
+//         }
+        
+//         Node left = head;
+//         Node right = head;
+        
+//         // Move the right pointer to the end of the list
+//         while (right.next != null) {
+//             right = right.next;
+//         }
+        
+//         while (left != null && right != null && left != right && left.data <= right.data) {
+//             int sum = left.data + right.data;
+            
+//             if (sum == target) {
+//                 ArrayList<Integer> pair = new ArrayList<>();
+//                 pair.add(left.data);
+//                 pair.add(right.data);
+//                 result.add(pair);
+//                 left = left.next;
+//                 right = right.prev;
+//             } else if (sum < target) {
+//                 left = left.next;
+//             } else {
+//                 right = right.prev;
+//             }
+//         }
+        
+//         return result;
+//     }
+// }
