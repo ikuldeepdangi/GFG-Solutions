@@ -135,13 +135,12 @@ class Tree
         
         while(!q.isEmpty()){
             int qn = q.size();
-            boolean isFirstNodeInLevel = true;
             
             for(int i=0;i<qn;i++){
                 Node curr = q.poll();
-                if(isFirstNodeInLevel){
-                    result.add(curr.data);
-                    isFirstNodeInLevel = false;
+                
+                if (i == 0) {
+                    result.add(curr.data); // Add the first node of each level to the result
                 }
                 
                 if(curr.left!=null)
