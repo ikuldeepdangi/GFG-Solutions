@@ -32,8 +32,8 @@ class GfG{
             int n = sc.nextInt();
             int val = sc.nextInt();
             
-            Node first = new Node(val);
-            Node tail = first;
+            Node num1 = new Node(val);
+            Node tail = num1;
             for(int i=0; i<n-1; i++)
             {
                 val = sc.nextInt();
@@ -44,8 +44,8 @@ class GfG{
             int m = sc.nextInt();
             val = sc.nextInt();
             
-            Node second = new Node(val);
-            tail = second;
+            Node num2 = new Node(val);
+            tail = num2;
             for(int i=0; i<m-1; i++)
             {
                 val = sc.nextInt();
@@ -54,7 +54,7 @@ class GfG{
             }
             
             Solution g = new Solution();
-            Node res = g.addTwoLists(first, second);
+            Node res = g.addTwoLists(num1, num2);
             printList(res);
         }
     }
@@ -76,60 +76,113 @@ class Node {
 }
 
 */
-class Solution {
-    // Function to reverse a linked list.
-    static Node reverseList(Node head) {
-        Node prev = null;
-        Node current = head;
-        Node next = null;
-        while (current != null) {
-            next = current.next;
-            current.next = prev;
-            prev = current;
-            current = next;
+
+
+
+/* node for linked list
+
+class Node {
+    int data;
+    Node next;
+
+    Node(int d) {
+        data = d;
+        next = null;
+    }
+}
+
+*/
+
+class Solution{
+    static Node reverse(Node num){
+        Node curr = num, prev = null;
+        
+        while(curr != null){
+            Node next = curr.next;
+            curr.next = prev;
+            prev = curr;
+            
+            curr = next;
         }
+        
         return prev;
     }
-
-    // Function to add two numbers represented by linked list.
-    static Node addTwoLists(Node first, Node second) {
-        // Reverse the input linked lists.
-        first = reverseList(first);
-        second = reverseList(second);
-
-        int sum = 0;
+    
+    //Function to add two numbers represented by linked list.
+    static Node addTwoLists(Node num1, Node num2){
+        // code here
+        // return head of sum list
+        if(num1 == null)
+            return num2;
+            
+        if(num2 == null)
+            return num1;
+        
+        //reversing both the numbers
+        num1 = reverse(num1);
+        num2 = reverse(num2);
+        
+        Node output = null;
         int carry = 0;
-
-        Node temp = null;
-        Node head = null;
-        Node tail = null;
-
-        while (first != null || second != null) {
-            sum = carry + (first != null ? first.data : 0) + (second != null ? second.data : 0);
-            carry = (sum >= 10) ? 1 : 0;
-            sum = sum % 10;
-
-            temp = new Node(sum);
-
-            if (head == null) {
-                head = temp;
-            } else {
-                tail.next = temp;
+        //adding digits of number 1 and number 2 and add to output
+        while(num1 != null && num2 != null){
+            int sum = (num1.data + num2.data) + carry;
+            Node temp = new Node(sum % 10);
+            carry = sum / 10;
+            
+            if(output == null){
+                output = temp;
+            }else{
+                temp.next = output;
+                output = temp;
             }
-
-            tail = temp;
-
-            if (first != null) first = first.next;
-            if (second != null) second = second.next;
+            
+            num1 = num1.next;
+            num2 = num2.next;
         }
-
-        if (carry > 0) {
-            tail.next = new Node(carry);
+        
+        //adding remaining digits of number 1
+        while(num1 != null){
+            int sum = num1.data + carry;
+            Node temp = new Node(sum % 10);
+            carry = sum / 10;
+            
+            temp.next = output;
+            output = temp;
+            
+            num1 = num1.next;
         }
-
-        // Reverse the result linked list back to the original order.
-        head = reverseList(head);
-
-        return head;
+        
+        //adding remaining digits of number 2
+        while(num2 != null){
+            int sum = num2.data + carry;
+            Node temp = new Node(sum % 10);
+            carry = sum / 10;
+            
+            temp.next = output;
+            output = temp;
+            
+            num2 = num2.next;
+        }
+        
+        //adding a node for carry it not zero
+        if(carry > 0){
+            Node temp = new Node(carry);
+            temp.next = output;
+            
+            return temp;
+        }
+        
+        //removing leading zeroes
+        while(output != null && output.data == 0){
+            output = output.next;
+        }
+        
+        //if output is null
+        if(output == null){
+            output = new Node(0);
+        }
+        
+        return output;
     }
 }
